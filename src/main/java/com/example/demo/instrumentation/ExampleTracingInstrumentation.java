@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
 
 @Component
 public class ExampleTracingInstrumentation extends SimpleInstrumentation {
-    private final static Logger LOGGER = LoggerFactory.getLogger(ExampleTracingInstrumentation.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExampleTracingInstrumentation.class);
     @Override
     public InstrumentationState createState() {
         return new TracingState();

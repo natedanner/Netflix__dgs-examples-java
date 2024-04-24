@@ -58,10 +58,8 @@ public class ReviewSubscriptionIntegrationTest {
 
         StepVerifier.create(starScore)
                 .thenAwait(Duration.ofSeconds(1))
-                .then(() -> {
-                    graphQLClient.reactiveExecuteQuery(addReviewMutation1.serialize(), Collections.emptyMap()).block();
-
-                })
+                .then(() ->
+                    graphQLClient.reactiveExecuteQuery(addReviewMutation1.serialize(), Collections.emptyMap()).block())
                 .then(() ->
                         graphQLClient.reactiveExecuteQuery(addReviewMutation2.serialize(), Collections.emptyMap()).block())
                 .expectNext(5)

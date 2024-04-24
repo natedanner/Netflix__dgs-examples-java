@@ -31,7 +31,7 @@ import java.util.stream.IntStream;
  */
 @Service
 public class DefaultReviewsService implements ReviewsService {
-    private final static Logger logger = LoggerFactory.getLogger(DefaultReviewsService.class);
+    private static final Logger logger = LoggerFactory.getLogger(DefaultReviewsService.class);
 
     private final ShowsService showsService;
     private final Map<Integer, List<Review>> reviews = new ConcurrentHashMap<>();
@@ -86,7 +86,7 @@ public class DefaultReviewsService implements ReviewsService {
     }
 
     public void saveReview(SubmittedReview reviewInput) {
-        List<Review> reviewsForShow = reviews.computeIfAbsent(reviewInput.getShowId(), (key) -> new ArrayList<>());
+        List<Review> reviewsForShow = reviews.computeIfAbsent(reviewInput.getShowId(), key -> new ArrayList<>());
         Review review = Review.newBuilder()
                 .username(reviewInput.getUsername())
                 .starScore(reviewInput.getStarScore())
@@ -100,7 +100,7 @@ public class DefaultReviewsService implements ReviewsService {
 
     public void saveReviews(List<SubmittedReview> reviewsInput) {
         reviewsInput.forEach(reviewInput -> {
-            List<Review> reviewsForShow = reviews.computeIfAbsent(reviewInput.getShowId(), (key) -> new ArrayList<>());
+            List<Review> reviewsForShow = reviews.computeIfAbsent(reviewInput.getShowId(), key -> new ArrayList<>());
             Review review = Review.newBuilder()
                     .username(reviewInput.getUsername())
                     .starScore(reviewInput.getStarScore())

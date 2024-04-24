@@ -56,7 +56,7 @@ public class ReviewSubscriptionTest {
 
             @Override
             public void onNext(ExecutionResult executionResult) {
-                if (executionResult.getErrors().size() > 0) {
+                if (!executionResult.getErrors().isEmpty()) {
                     System.out.println(executionResult.getErrors());
                 }
                 Map<String, Object> review = executionResult.getData();
